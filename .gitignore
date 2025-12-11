@@ -1,2 +1,47 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Yarn Berry
+# Ignore Yarn's cache and unplugged modules
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+.pnp
+
+# TypeScript
+dist/
+build/
+*.tsbuildinfo
+
+# Env files
 .env
-node_modules
+.env.*
+!.env.example
+
+# Drizzle
+drizzle/
+# or if schema snapshots should be ignored:
+drizzle/migrations/*-snapshot.json
+
+# Logs
+logs/
+*.log
+debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
