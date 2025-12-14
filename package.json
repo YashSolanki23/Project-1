@@ -19,11 +19,16 @@
     "@types/express": "^5.0.6",
     "@types/node": "^24.10.2",
     "@types/pg": "^8.15.6",
+    "@types/supertest": "^6.0.3",
     "drizzle-kit": "^0.31.8",
+    "supertest": "^7.1.4",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "test": "vitest",
+    "test:watch":"vitest --watch"
   }
 }
