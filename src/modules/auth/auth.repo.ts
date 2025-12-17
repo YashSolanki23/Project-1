@@ -30,3 +30,32 @@ export async function getAllUsers(){
   })
   
 }
+
+export async function updateUserById(
+  id:string,
+  data:Partial<{email:string,role:string}>
+){
+  const [user]=await db
+  .update(users)
+  .set(data)
+  .where(eq(users.id,id))
+  .returning();
+
+  return user;
+}
+
+export async function deleteUserById(id:string)
+{
+  await db.delete(users).where(eq(users.id,id));
+}
+
+
+export async function UpdateUserRole(req:Request,res:Response)
+{
+   const {id}=req.params;
+    const {role}=req.body;
+
+    await db.update(users).set({role}).where(eq(users.id,id));
+ 
+    res.status(204).send();
+}

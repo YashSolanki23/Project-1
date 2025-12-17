@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { loginController,registerController,refreshController} from "./auth.controller";
-import { validate } from "../../core/middlewares/validate.middleware";
-import { registerSchema,loginSchema,refreshSchema } from "./auth.schema";
-import { requireAuth } from "../../core/middlewares/auth.middleware";
+import { loginController,registerController,refreshController} from "../modules/auth/auth.controller"
+import { validate } from "../core/middlewares/validate.middleware";
+import { registerSchema,loginSchema,refreshSchema } from "../modules/auth/auth.schema"
+import { requireAuth } from "../core/middlewares/auth.middleware";
 const authRoute=Router();
 //public routes
 authRoute.post("/register",validate(registerSchema),registerController);

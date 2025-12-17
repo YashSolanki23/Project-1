@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import { Env } from "../config/Env";
 import { AppError } from "../core/errors/Apperror";
 export function generateAccessToken(userId:string,role:string)

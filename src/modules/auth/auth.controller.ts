@@ -1,5 +1,6 @@
 import { Request,Response,NextFunction } from "express";
 import * as AuthService from "./auth.service";
+import { deleteUserById, getAllUsers, updateUserById } from "./auth.repo";
 
 export async function registerController(
 req:Request,
@@ -24,6 +25,7 @@ next:NextFunction
 try {
   const result=await AuthService.login(req.body);
   res.json(result)
+  console.log("Logged In",result);
 } catch (err) {
   next(err)
 }
@@ -38,7 +40,9 @@ try {
   const { refreshToken }=req.body;
   const result=await AuthService.refresh(refreshToken)
   res.json(result)
+  console.log("refresh token",result)
 } catch (err) {
   next(err)
 }
 }
+
