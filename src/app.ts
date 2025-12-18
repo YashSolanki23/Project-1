@@ -5,6 +5,7 @@ import  authRoute from "./routes/auth.routes";
 import adminRoute from "./routes/admin-routes";
 import { rateLimiter } from "./core/middlewares/rateLimit.middleware";
 import { requestLogger } from "./core/middlewares/logger.middleware";
+import TaskRouter from "./routes/task.routes";
 
 export function createApp() {
  
@@ -19,6 +20,7 @@ app.use(requestLogger)
 app.use(rateLimiter)
 app.use("/auth",authRoute)
 app.use("/admin",adminRoute);
+app.use("/tasks",TaskRouter)
 app.use(errorHandler)
 
   return app;
