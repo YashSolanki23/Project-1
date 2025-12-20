@@ -4,7 +4,8 @@ import { tasks } from "../../config/db/schema/tasks";
 
 export async function createTask(data:{
   title:string,
-  description?:string,
+  description:string,
+  priority?:string,
   userId:string
 }){
 return await db.insert(tasks).values(data).returning();
