@@ -1,8 +1,6 @@
 import { db } from "../../config/db/db";
-import { eq,and, ilike } from "drizzle-orm";
+import { eq,and, ilike,or } from "drizzle-orm";
 import { tasks } from "../../config/db/schema/tasks";
-import ta from "zod/v4/locales/ta.js";
-import { off } from "process";
 
 export async function createTask(data:{
   title:string,
@@ -73,7 +71,7 @@ if(search){
       ilike(tasks.title,`%${search}%`),
       ilike(tasks.description,`%${search}%`)
     )
-  );
+  )
 }
 
 if(status)

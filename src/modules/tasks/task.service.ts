@@ -1,4 +1,4 @@
-import { createTask ,deleteTask,findByUserId} from "./task.repo";
+import { createTask ,deleteTask,findByUserId, getTasksAdvanced} from "./task.repo";
 import { AppError} from "../../core/errors/Apperror";
 import { tasks } from "../../config/db/schema/tasks";
 import { updateTask } from "./task.repo";
@@ -65,4 +65,22 @@ if(del_task.rowCount==0)
   throw new AppError("NotFound","TaskNotFound",404);
 }
 return del_task;
+}
+
+export async function getTasksAdvancedService(
+  userId:string,
+  query:{
+    search?:string,
+    status?:string,
+    priority?:string,
+    page?:number,
+    limit?:number,
+    sortBy?: "createdAt" | "updatedAt" | "title",
+    order?: "asc" | "desc"
+  }
+){
+  return await  getTasksAdvanced({
+    userId,
+    ...query
+  });
 }

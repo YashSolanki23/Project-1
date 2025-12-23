@@ -5,6 +5,7 @@ import {
   getTaskByIdService,
   updateTaskService,
   deleteTaskService,
+  getTasksAdvancedService,
 } from "./task.service";
 
 
@@ -99,5 +100,32 @@ export async function deleteTaskController(
     res.status(204).send();
   } catch (err) {
     next(err);
+  }
+}
+
+
+export async function getTasksAdvancedController(
+  req:Request,
+  res:Response,
+  next:NextFunction
+){
+
+  try {
+    const userId = (req as any).user.id
+
+    const tasks=await getTasksAdvancedService(userId,{
+      search: req.query.search as string,
+      status: req.query.status as string,
+      priority: req.query.priority as string,
+      page:Number(req.query.page) || 1,
+      limit:Number(req.query.limit) || 10,
+      sortBy: req.query.sortBy as any,
+      order: req.query.order as any
+    });
+
+    res.json(tasks)
+
+  } catch (err) {
+    next(err)
   }
 }

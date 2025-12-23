@@ -17,6 +17,7 @@ let refreshToken:string;
 
 describe("Auth Flow",()=>{
 // registration of user
+ process.env.NODE_ENV = "test";
   it("Register a new user",async ()=>{
     const result=await request(app)
     .post("/auth/register")

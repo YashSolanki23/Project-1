@@ -8,6 +8,7 @@ import {
   createTaskController,
   updateTaskController,
   deleteTaskController,
+  getTasksAdvancedController,
 } from "../modules/tasks/task.controller"
 
 
@@ -17,7 +18,8 @@ TaskRouter.use(requireAuth)
 
 TaskRouter.get("/", listTasksController);
 TaskRouter.get("/:id", getTaskController);
-TaskRouter.post("/",validate(createTaskSchema),createTaskController)
+TaskRouter.get("/search",getTasksAdvancedController)
+TaskRouter.post("/createtask",validate(createTaskSchema),createTaskController)
 TaskRouter.patch("/:id", updateTaskController);
 TaskRouter.delete("/:id", deleteTaskController);
 
