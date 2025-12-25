@@ -9,7 +9,6 @@ adminRoute.use(requireAuth,requireAdmin)
 
 adminRoute.get("/users",getUsersController);
 adminRoute.patch("/users/:id",updateUserController)
-adminRoute.patch("/users/:id/:role",updateUserRoleController)
 adminRoute.delete("/users/:id",deleteUserController);
 
 export default adminRoute;

@@ -49,16 +49,3 @@ export async function deleteUserById(id:string)
   await db.delete(users).where(eq(users.id,id));
 }
 
-
-export async function UpdateUserRole(req:Request,res:Response)
-{
-   const {id}=req.params;
-    const {role}=req.body;
-
-   const userinfo= await db.update(users).set({role}).where(eq(users.id,id));
- 
-    return res.send({
-      status:"user role updated",
-      msg:userinfo
-    });
-}

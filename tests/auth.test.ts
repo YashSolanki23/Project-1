@@ -1,8 +1,6 @@
 import request from "supertest"
 import {describe,it,beforeAll, expect} from "vitest"
 import { createApp } from "../src/app"
-import e from "express";
-import { StringValidation } from "zod/v3";
 
 
 const app=createApp();
@@ -11,11 +9,11 @@ const user = {
   email: `test_${Date.now()}@example.com`,
   password: "12345678",
 };
-
-
 let refreshToken:string;
-let userid:string;
-let role:string;
+let accessToken: string;
+let userid: string;
+
+
 
 describe("Auth Flow",()=>{
 // registration of user
@@ -23,8 +21,13 @@ describe("Auth Flow",()=>{
   it("Register a new user",async ()=>{
     const result=await request(app)
     .post("/auth/register")
-    .send(user);
- 
+    .send({
+        email:user.email,
+  password:user.password,
+  role:"admin"
+    });
+ console.log(result.body)
+userid=result.body.id
   expect(result.status).toBe(201);
   expect(result.body).toHaveProperty("id");
   expect(result.body.email).toBe(user.email);
@@ -36,13 +39,13 @@ it("logins in a user",async ()=>{
 const result=await request(app)
 .post("/auth/login")
 .send(user);
-console.log(result.body);
+
 expect(result.status).toBe(200);
 expect(result.body).toHaveProperty("accessToken");
 expect(result.body).toHaveProperty("refreshToken");
 
 refreshToken=result.body.refreshToken;
-
+accessToken=result.body.accessToken;
 });
 
 
@@ -96,11 +99,3 @@ expect(result.status).toBe(401);
 
 });
 
-it("update the role of user",async ()=>{
-  const result=request(app)
-  .patch("/users/:id/:role")
-  .send({
-    
-  })
-  
-});
